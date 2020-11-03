@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Stack overflow semantic search</title>
+</head>
+<body style="background-color:#F5FFFA;">
+<center><h2> Top 10 most similar results </h2></center>
+<ul>
+  {% for name in res.top_10 %}
+  <li> <a href = {{name[1]}}> {{name[0]}}</a> </li>
+  <br>
+  {% endfor %}
+</ul>
+</body>
+</html>
