@@ -75,10 +75,10 @@ def preprocess_title(text):
 
 
 # load train data
-X_train = pd.read_csv('X_train.csv')
+X_train = pd.read_csv('X_train_limited.csv')
 print('X_train Loaded')
 # trained gensim w2v model on train data
-tfidf_w2v_vectors_gensim = joblib.load('gensim_tfidf_w2v_vectors.pkl')
+tfidf_w2v_vectors_gensim = joblib.load('gensim_tfidf_w2v_vectors_limited.pkl')
 print('tfidf_w2v_vectors_gensim loaded')
 # Dictionary of words and idf value
 tfidf_gensim = joblib.load('tfidf.pkl')
