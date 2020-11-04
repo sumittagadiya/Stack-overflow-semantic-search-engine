@@ -74,6 +74,24 @@ def preprocess_title(text):
     return text
 
 
+# load train data
+X_train = pd.read_csv('x_train.csv')
+print('X_train Loaded')
+# trained gensim w2v model on train data
+tfidf_w2v_vectors_gensim = joblib.load('gensim_tfidf_w2v_vectors.pkl')
+print('tfidf_w2v_vectors_gensim loaded')
+# Dictionary of words and idf value
+tfidf_gensim = joblib.load('tfidf.pkl')
+print('tfidf_gensim Loaded')
+# trained w2v model using gensim
+w2v_model_gensim = joblib.load('gensim_w2v_model.pkl')
+print('w2v_model_gensim loaded')
+# w2vec words vocabulary
+w2v_words = list(w2v_model_gensim.wv.vocab)
+# tfidf words
+tfidf_words = set(tfidf_gensim.get_feature_names())
+# dictionary of tfidf and idf values
+dictionary = dict(zip(tfidf_gensim.get_feature_names(),tfidf_gensim.idf_))
 
 
 ######################################### route paths ##################################################
@@ -138,27 +156,6 @@ def final_func(top_n=10):
 
 
 if __name__ == '__main__':
-    # load train data
-    X_train = pd.read_csv('x_train.csv')
-    print('X_train Loaded')
-    # trained gensim w2v model on train data
-    tfidf_w2v_vectors_gensim = joblib.load('gensim_tfidf_w2v_vectors.pkl')
-    print('tfidf_w2v_vectors_gensim loaded')
-
-    # Dictionary of words and idf value
-    tfidf_gensim = joblib.load('tfidf.pkl')
-    print('tfidf_gensim Loaded')
-    # trained w2v model using gensim
-    w2v_model_gensim = joblib.load('gensim_w2v_model.pkl')
-    print('w2v_model_gensim loaded')
-    
-    # w2vec words vocabulary
-    w2v_words = list(w2v_model_gensim.wv.vocab)
-    # tfidf words
-    tfidf_words = set(tfidf_gensim.get_feature_names())
-    # dictionary of tfidf and idf values
-    dictionary = dict(zip(tfidf_gensim.get_feature_names(),tfidf_gensim.idf_))
-
 
     app.run(host='0.0.0.0', port=8080, debug=True)
 
